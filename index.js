@@ -1,28 +1,45 @@
 const express = require("express");
-
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const db = require("./models/company");
 
+const http = require("http");
 const connect = require("./database/connection");
-
 const apiRouter = require("./routes");
 
 const app = express();
-const http = require("http");
 const server = http.createServer(app);
-const cors = require("cors");
 
-const port = 5000;
+var corOptions = {
+  origin: "http://localhost:5000",
+};
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(cors(corOptions));
+
+connect(app);  //postgresql과 연결 -> 데이터 베이스 연결 성공 뜨면 된거에용~
+
+// parse requests of content-type - application/json
 app.use(bodyParser.json());
 
-app.use("/api", apiRouter);
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
-server.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to my application." });
 });
 
-app.use(function (error, req, res, next){
-    res.status(BAD_REQUEST).json({ message : error.message })
+// set port, listen for requests
+const PORT = process.env.PORT || 5001;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on Port ${PORT}!`);
+// });
+
+server.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+  });
+
+  
+app.use(function (error, req, res, next) {
+res.status(BAD_REQUEST).json({ message: error.message })
 })
