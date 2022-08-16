@@ -14,7 +14,7 @@ exports.createCompany = async (req, res) => {
         // const { 회사_id, 채용포지션, 채용보상금, 채용내용, 사용기술 } = req.body;
         
         const com_info = {
-            회사_id : req.body.company_id,
+            공고_id : req.body.notice_id,
             회사명 : req.body.company_name,
             국가 : req.body.country,
             지역 : req.body.region,
@@ -24,8 +24,16 @@ exports.createCompany = async (req, res) => {
             사용기술 : req.body.skill,
         }
 
+        const com_group = {
+            공고_id : req.body.notice_id,
+            회사명 : req.body.company_name,
+        }
+
         await companyServices.createCompany({com_info});
         console.log("createCompany success");
+
+        //회사가 올린 다른 채용공고 추가
+        await companyServices.addSameCompany({com_group});
 
         res.status(CREATED).json({
           message: '채용 공고 등록 성공',
@@ -43,12 +51,15 @@ exports.updateCompany = async (req, res) => {
         console.log(req.body);
 
         const com_info = {
-            회사_id : req.body.company_id,
-            채용포지션 : req.body.recu_position,
-            채용보상금 : req.body.recu_bonus,
-            채용내용 : req.body.recu_info,
-            사용기술 : req.body.skill,
-        }
+          공고_id : req.body.notice_id,
+          회사명 : req.body.company_name,
+          국가 : req.body.country,
+          지역 : req.body.region,
+          채용포지션 : req.body.recu_position,
+          채용보상금 : req.body.recu_bonus,
+          채용내용 : req.body.recu_info,
+          사용기술 : req.body.skill,
+      }
 
         await companyServices.updateCompany({com_info});
         // console.log("updateCompany success");
@@ -67,9 +78,9 @@ exports.updateCompany = async (req, res) => {
 exports.deleteCompany = async (req, res) => {
     try {
         console.log(req.body);
-        회사_id = req.body.company_id;
+        공고_id = req.body.notice_id;
 
-        await companyServices.deleteCompany(회사_id);
+        await companyServices.deleteCompany(공고_id);
         // console.log("deleteCompany success");
 
         res.status(CREATED).json({
@@ -100,7 +111,7 @@ exports.findAllCompany = async (req, res) => {
       }
 }
 
-
+// 키워드로 공고 조회
 exports.findCompanyIncludeName = async (req, res) => {
 
     // const { search } = req.params;

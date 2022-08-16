@@ -1,4 +1,5 @@
 // const Company = require('../models/company');
+const { sequelize } = require("../models");
 const db = require("../models");
 const Op = db.Sequelize.Op;   // like를 사용하기 위해
 const company_info = db.company_info;  //models의 index.js에 있는 db.company_info랑 맞춰줘야해! create 안되었던 이유
@@ -6,7 +7,7 @@ const company_info = db.company_info;  //models의 index.js에 있는 db.company
 exports.createCompany = async ({com_info}) => {
     try {
         const company = await company_info.create({
-            회사_id: com_info.회사_id,
+            공고_id: com_info.공고_id,
             회사명: com_info.회사명,
             국가: com_info.국가,
             지역: com_info.지역,
@@ -14,6 +15,7 @@ exports.createCompany = async ({com_info}) => {
             채용보상금: com_info.채용보상금,
             채용내용: com_info.채용내용,
             사용기술: com_info.사용기술,
+            회사가올린다른채용공고: [],
         });
     }
     catch (err) {
@@ -21,15 +23,30 @@ exports.createCompany = async ({com_info}) => {
     }
 };
 
+// 회사가 올린다른채용공고에 추가하기
+exports.groupingCompany = async ({com_group}) => {
+    try {
+
+        //포문을 돌며 추가해야할 듯...
+        company_info.update({ 
+            회사가올린다른채용공고 : sequelize.fn('array_append', sequelize.col('회사가올린다른채용공고'), com_group.공고_id)}, 
+            { where: {회사명: com_group.회사명}},
+        );
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 // DB 수정
 exports.updateCompany = async ({com_info}) => {
     try {
         console.log("업데이트 로직");
-        const company_id = com_info.회사_id;
+        const notice_id = com_info.공고_id;
 
         //기존의 것에 새로 추가가 아니라 com_info로 update
         company_info.update(com_info, {
-            where: {회사_id: company_id},
+            where: {공고_id: notice_id},
         })
     }
     catch (err) {
@@ -38,13 +55,13 @@ exports.updateCompany = async ({com_info}) => {
 };
 
 //삭제로직은 destroy 함수를 사용하네요!
-exports.deleteCompany = async (회사_id) => {
+exports.deleteCompany = async (공고_id) => {
     try {
         console.log("삭제 로직");
-        const company_id = 회사_id;
+        const notice_id = 공고_id;
 
         company_info.destroy({
-            where: {회사_id: company_id},
+            where: {공고_id: notice_id},
         })
     }
     catch (err) {
