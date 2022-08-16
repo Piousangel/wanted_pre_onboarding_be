@@ -6,6 +6,7 @@ const db = require("../../models/");
 const company_info = db.company_info;
 const Op = db.Sequelize.Op;
 
+// 공고 생성
 exports.createCompany = async (req, res) => {
     try {
         console.log(req.body);
@@ -33,12 +34,11 @@ exports.createCompany = async (req, res) => {
       }
 }
 
+// 공고 수정
 exports.updateCompany = async (req, res) => {
     try {
         console.log(req.body);
 
-        // const { 회사_id, 채용포지션, 채용보상금, 채용내용, 사용기술 } = req.body;
-        
         const com_info = {
             회사_id : req.body.company_id,
             채용포지션 : req.body.recu_position,
@@ -60,6 +60,7 @@ exports.updateCompany = async (req, res) => {
       }
 }
 
+// 공고 삭제
 exports.deleteCompany = async (req, res) => {
     try {
         console.log(req.body);
@@ -78,6 +79,7 @@ exports.deleteCompany = async (req, res) => {
       }
 }
 
+// 공고 전체 조회
 exports.findAllCompany = async (req, res) => {
     try {
         

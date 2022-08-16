@@ -17,11 +17,13 @@ exports.createCompany = async ({com_info}) => {
     }
 };
 
+// DB 수정
 exports.updateCompany = async ({com_info}) => {
     try {
         console.log("업데이트 로직");
         const company_id = com_info.회사_id;
 
+        //기존의 것에 새로 추가가 아니라 com_info로 update
         company_info.update(com_info, {
             where: {회사_id: company_id},
         })
