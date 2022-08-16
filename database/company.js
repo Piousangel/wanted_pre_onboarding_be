@@ -1,6 +1,6 @@
 // const Company = require('../models/company');
 const db = require("../models");
-const Op = db.Sequelize.Op;
+const Op = db.Sequelize.Op;   // like를 사용하기 위해
 const company_info = db.company_info;  //models의 index.js에 있는 db.company_info랑 맞춰줘야해! create 안되었던 이유
 
 exports.createCompany = async ({com_info}) => {
@@ -80,8 +80,6 @@ exports.findAllNoitce = async (search) => {
         })
 
         return search_result;
-        // const allCompanies = company_info.findAll();
-        // return allCompanies;
     }
     catch (err) {
         console.log(err);

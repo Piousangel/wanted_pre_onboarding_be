@@ -10,7 +10,7 @@ router.post('/delete', controller.deleteCompany);  //공고 삭제
 
 router.get('/findAll', controller.findAllCompany);       //회사 공고 목록 조회
 
-router.get('/some/url?', controller.findCompanyIncludeName);
+router.get('/some/url?', controller.findCompanyIncludeName);   //쿼리스트링을 통한 공고 검색
 
 // router.post('/findbyCompanyName', controller.findByCompanyName);
 // 보너스1. some/url?search=원티드로 검색했을 때 원티드가 포함된 모든 공고 조회할 수 있게 해야함.
