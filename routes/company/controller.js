@@ -3,7 +3,7 @@ const { OK, CREATED, BAD_REQUEST } = require('../../config/statusCode').statusCo
 const companyServices = require('../../services/company');
 
 const db = require("../../models/");
-const company_info = db.company_info;
+// const company_info = db.company_info;
 const Op = db.Sequelize.Op;
 
 // 공고 생성
