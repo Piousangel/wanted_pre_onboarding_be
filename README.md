@@ -1,5 +1,18 @@
 # 원티드 온보딩!
+
+Sequelize의 작동원리
+
+1. Express start
+2. Express 내부의 Sequelize가 models/index.js 실행.  => index.js가 먼저 실행되는 이유를 여기서 알았습니다!
+3. models/index.js에서 models폴더 내부 entity정보를 읽어 Sequelize에 담는다.
+   - sequelize.sync(); => 접근한 DB스키마에 테이블 생성 및 테이블 관계 형성
+4. Express에서 Sequeelize를 통해 db에 접근하여 Create, Read, Update, Delete 진행
+
+-----
+
 기술 스택 : node.js express postgresql sequelize
+
+-----
 
 <img width="1363" alt="스크린샷 2022-08-16 오전 10 21 58" src="https://user-images.githubusercontent.com/55525574/184778853-ac75364a-ce68-49b2-9df7-11e63ac8f458.png">
 
