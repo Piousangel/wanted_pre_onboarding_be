@@ -45,9 +45,7 @@ server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
 
-console.log("AAA");
 app.use("/api", apiRouter);
-console.log("BBB");
 
 // app.use(function (error, req, res) {
 //     res.status(BAD_REQUEST).json({ message: error.message })
