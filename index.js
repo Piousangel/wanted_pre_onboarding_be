@@ -1,13 +1,15 @@
 const express = require("express");
+const { OK, CREATED, BAD_REQUEST } = require('./config/statusCode').statusCode;
 const bodyParser = require("body-parser");
 const cors = require("cors");
+// const cookieParser = require("cookie-parser");
 const db = require("./models");
 
-const http = require("http");
-const connect = require("./database/connection");
+// const connect = require("./database/connection");
 const apiRouter = require("./routes");
 
 const app = express();
+const http = require("http");
 const server = http.createServer(app);
 
 // var corOptions = {
@@ -21,11 +23,12 @@ app.use(cors());
 
 db.sequelize.sync();  //sequelize.sync() 동기화!
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// app.use(cookieParser());
+
 
 // simple route
 app.get("/", (req, res) => {
@@ -40,10 +43,12 @@ const PORT = 5000;
 
 server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
-  });
+});
 
+console.log("AAA");
 app.use("/api", apiRouter);
+console.log("BBB");
 
-app.use(function (error, req, res, next) {
-res.status(BAD_REQUEST).json({ message: error.message })
-})
+// app.use(function (error, req, res) {
+//     res.status(BAD_REQUEST).json({ message: error.message })
+// })

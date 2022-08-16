@@ -5,9 +5,9 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.passw
 	host: dbConfig.host,
   	dialect: dbConfig.dialect,
   	operatorsAliases: false,
-  
+    port : dbConfig.port,
   	pool: {
-    	max: dbConfig.pool.max,	
+        max: dbConfig.pool.max,
    		min: dbConfig.pool.min,
       	acquire: dbConfig.pool.acquire,
       	idle: dbConfig.pool.idle
@@ -19,6 +19,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.tutorials = require("./company.js")(sequelize, Sequelize);
+db.company_info = require("./company.js")(sequelize, Sequelize);
 
 module.exports = db;

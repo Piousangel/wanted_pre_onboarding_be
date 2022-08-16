@@ -5,6 +5,7 @@ module.exports = {
   	password: "test_password",
   	database: "testdb",
   	dialect: "postgres",
+    port:5432,
   	pool: {
 		max: 5,
   		min: 0,
