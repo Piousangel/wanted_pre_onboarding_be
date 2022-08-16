@@ -15,6 +15,9 @@ exports.createCompany = async (req, res) => {
         
         const com_info = {
             회사_id : req.body.company_id,
+            회사명 : req.body.company_name,
+            국가 : req.body.country,
+            지역 : req.body.region,
             채용포지션 : req.body.recu_position,
             채용보상금 : req.body.recu_bonus,
             채용내용 : req.body.recu_info,
@@ -96,4 +99,26 @@ exports.findAllCompany = async (req, res) => {
         });
       }
 }
+
+
+exports.findCompanyIncludeName = async (req, res) => {
+
+    // const { search } = req.params;
+    const { search } = req.query;
+    // console.log("req.,,,in controller", req);
+    console.log("name in controller", search);
+
+    const foundTables = await companyServices.findByName(search);
+    if(!foundTables) {
+      res.status(CREATED).json({
+        message: "해당 단어로 조회가 불가능합니다.",
+      });
+    }
+    else {
+        res.status(CREATED).json({
+          message: "조회된 채용공고 리스트 입니다.",
+          list : foundTables,
+        });
+    }  
+};
 

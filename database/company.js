@@ -1,11 +1,15 @@
 // const Company = require('../models/company');
 const db = require("../models");
+const Op = db.Sequelize.Op;
 const company_info = db.company_info;  //models의 index.js에 있는 db.company_info랑 맞춰줘야해! create 안되었던 이유
 
 exports.createCompany = async ({com_info}) => {
     try {
         const company = await company_info.create({
             회사_id: com_info.회사_id,
+            회사명: com_info.회사명,
+            국가: com_info.국가,
+            지역: com_info.지역,
             채용포지션: com_info.채용포지션,
             채용보상금: com_info.채용보상금,
             채용내용: com_info.채용내용,
@@ -60,13 +64,26 @@ exports.findAllCompany = async () => {
     }
 }
 
+// 키워드로 공고를 찾는 로직
+exports.findAllNoitce = async (search) => {
+    try {
+        console.log("해당 이름으로 공고 찾는 로직");
+        console.log("name : ", search);
+        const searchVar = search;
 
-  
+        let search_result = await company_info.findAll({
+            where: {
+                회사명: {
+                    [Op.like]: `%${searchVar}`
+                }
+            }
+        })
 
-//return await company_info.create({ '회사_id': 회사_id }).exec();
-// exports.upsert = async ({filter, update}) => {
-// return await User.findOneAndUpdate(filter, update, {
-//     new: true,
-//     upsert: true
-// });
-// }
+        return search_result;
+        // const allCompanies = company_info.findAll();
+        // return allCompanies;
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
