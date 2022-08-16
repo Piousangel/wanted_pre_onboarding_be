@@ -22,13 +22,7 @@ exports.updateCompany = async ({com_info}) => {
         console.log("업데이트 로직");
         const company_id = com_info.회사_id;
 
-        company_info.update({
-            회사_id: com_info.회사_id,
-            채용포지션: com_info.채용포지션,
-            채용보상금: com_info.채용보상금,
-            채용내용: com_info.채용내용,
-            사용기술: com_info.사용기술,
-
+        company_info.update(com_info, {
             where: {회사_id: company_id},
         })
     }

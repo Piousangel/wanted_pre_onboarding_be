@@ -10,6 +10,8 @@ router.post('/delete', controller.deleteCompany);  //공고 삭제
 
 router.get('/findAll', controller.findAllCompany);       //회사 공고 목록 조회
 
+
+
 // 보너스1. some/url?search=원티드로 검색했을 때 원티드가 포함된 모든 공고 조회할 수 있게 해야함.
 
 // 보너스2. 채용 상세 페이지 가져오기 
