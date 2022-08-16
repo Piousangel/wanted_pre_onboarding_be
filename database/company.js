@@ -23,6 +23,9 @@ exports.createCompany = async ({com_info}) => {
     }
 };
 
+// 간단히 array_append를 정리하자면 update치면서 변경할 컬럼에 추가하고 싶은 받아온 데이터를 넣어주는 형식
+// where 절로 같은 회사끼리만 구분해주구요! 
+
 // 회사가 올린다른채용공고에 추가하기
 exports.groupingCompany = async ({com_group}) => {
     try {
