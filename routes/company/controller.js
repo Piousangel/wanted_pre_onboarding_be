@@ -66,7 +66,7 @@ exports.deleteCompany = async (req, res) => {
         회사_id = req.body.company_id;
 
         await companyServices.deleteCompany(회사_id);
-        console.log("deleteCompany success");
+        // console.log("deleteCompany success");
 
         res.status(CREATED).json({
           message: '채용 공고 삭제 성공',
@@ -77,3 +77,21 @@ exports.deleteCompany = async (req, res) => {
         });
       }
 }
+
+exports.findAllCompany = async (req, res) => {
+    try {
+        
+        const companies_list = await companyServices.findAllCompany();
+        console.log("findAllCompany success");
+
+        res.status(CREATED).json({
+          message: '전체 채용 공고 조회 성공',
+          list : companies_list,
+        });
+      } catch (error) {
+        res.status(BAD_REQUEST).json({
+          message: '전체 채용 공고 조회 실패',
+        });
+      }
+}
+

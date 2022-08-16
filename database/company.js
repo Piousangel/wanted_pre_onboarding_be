@@ -52,6 +52,18 @@ exports.deleteCompany = async (회사_id) => {
     }
 };
 
+exports.findAllCompany = async () => {
+    try {
+        console.log("전체 공고 찾는 로직");
+        
+        const allCompanies = company_info.findAll();
+        return allCompanies;
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 
   
 

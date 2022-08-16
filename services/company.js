@@ -1,5 +1,5 @@
 const Company = require('../models/company');
-const { createCompany, updateCompany, deleteCompany } = require('../database/company');
+const { createCompany, updateCompany, deleteCompany, findAllCompany } = require('../database/company');
 
 
 //공고 생성
@@ -22,3 +22,7 @@ exports.deleteCompany = async (회사_id) => {
     return await deleteCompany(회사_id);
 }
 
+exports.findAllCompany = async () => {
+
+    return await findAllCompany();
+}
