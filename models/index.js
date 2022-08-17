@@ -22,5 +22,6 @@ db.sequelize = sequelize;
 //company, user sequelize 등록하기
 db.company_info = require("./company.js")(sequelize, Sequelize);
 db.user_info = require("./user.js")(sequelize, Sequelize);
+db.notices = require("./notice.js")(sequelize, Sequelize);
 
 module.exports = db;

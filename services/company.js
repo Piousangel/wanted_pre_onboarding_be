@@ -1,5 +1,5 @@
 const Company = require('../models/company');
-const { createCompany, updateCompany, deleteCompany, findAllCompany, findAllNoitce, groupingCompany } = require('../database/company');
+const { createCompany, updateCompany, deleteCompany, findAllCompany, findAllNoitce, groupingCompany, synCompany } = require('../database/company');
 
 
 //공고 생성
@@ -9,10 +9,17 @@ exports.createCompany = async ({com_info}) => {
 };
 
 // 회사가 올린 다른채용공고에 추가하기
-exports.addSameCompany = async ({com_group}) => {
+exports.searchSameCompany = async ({com_group}) => {
     
     return await groupingCompany({com_group});
 }
+
+// 동기화 작업
+exports.addSameCompany = async ({temp_set, com_group}) => {
+
+    return await synCompany({temp_set, com_group});
+}
+
 
 //공고 수정
 exports.updateCompany = async ({com_info}) => {

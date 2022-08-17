@@ -4,7 +4,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         사용자_id: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            primaryKey: true,
         },
         지원여부: {
             type: Sequelize.BOOLEAN

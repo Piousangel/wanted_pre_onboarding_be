@@ -20,7 +20,7 @@ exports.applyCompany = async (req, res) => {
         console.log("Apply success");
         if (info === false) {
             res.status(CREATED).json({
-                message: '회사 지원 실패(이전에 지원한 이력이 있습니다)',
+                message: '회사 지원 실패(이전에 지원한 이력이 있거나 없는 공고 입니다.)',
             });
         }
         else{

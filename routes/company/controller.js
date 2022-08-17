@@ -1,6 +1,7 @@
 const { OK, CREATED, BAD_REQUEST } = require('../../config/statusCode').statusCode;
 
 const companyServices = require('../../services/company');
+const noticeServices = require('../../services/notice');
 
 const db = require("../../models/");
 // const company_info = db.company_info;
@@ -10,9 +11,7 @@ const Op = db.Sequelize.Op;
 exports.createCompany = async (req, res) => {
     try {
         console.log(req.body);
-
-        // const { 회사_id, 채용포지션, 채용보상금, 채용내용, 사용기술 } = req.body;
-        
+ 
         const com_info = {
             공고_id : req.body.notice_id,
             회사명 : req.body.company_name,
@@ -33,7 +32,9 @@ exports.createCompany = async (req, res) => {
         console.log("createCompany success");
 
         //회사가 올린 다른 채용공고 추가
-        await companyServices.addSameCompany({com_group});
+        let temp_set = await noticeServices.syncSameCompany({com_group});
+
+        // await companyServices.addSameCompany({temp_set, com_group});
 
         res.status(CREATED).json({
           message: '채용 공고 등록 성공',

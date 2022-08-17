@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
 	const company_info = sequelize.define("company_info", {
         공고_id: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            primaryKey: true,
         },
         회사명: {
             type: Sequelize.STRING
@@ -24,9 +25,9 @@ module.exports = (sequelize, Sequelize) => {
         사용기술: {
             type: Sequelize.STRING
         },
-        회사가올린다른채용공고: {
-            type: Sequelize.ARRAY(Sequelize.TEXT)
-        }
+        // 회사가올린다른채용공고: {
+        //     type: Sequelize.ARRAY(Sequelize.TEXT)
+        // }
 	});
 
 	return company_info

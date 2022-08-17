@@ -16,7 +16,11 @@ exports.createCompany = async ({com_info}) => {
             채용내용: com_info.채용내용,
             사용기술: com_info.사용기술,
             회사가올린다른채용공고: [],
-        });
+        },
+        // {
+        //     updateOnDuplicate: ["회사가올린다른채용공고"]
+        // }
+        );
     }
     catch (err) {
         console.log(err);
@@ -30,11 +34,60 @@ exports.createCompany = async ({com_info}) => {
 exports.groupingCompany = async ({com_group}) => {
     try {
 
-        //포문을 돌며 추가해야할 듯...
-        company_info.update({ 
-            회사가올린다른채용공고 : sequelize.fn('array_append', sequelize.col('회사가올린다른채용공고'), com_group.공고_id)}, 
-            { where: {회사명: com_group.회사명}},
-        );
+        // 같은 회사 table의 회사가올린다른채용공고 컬럼에 foreach로 다 추가해줄 예정.
+        // let temp_set = [];
+        // ========================================================================
+
+        let temp_set = new Set();
+        await company_info.findAll({
+            where: {회사명: com_group.회사명},
+            }).then(function (instances) {
+                instances.forEach(function (instance){
+                    // 회사가올린다른채용공고.push(instance.공고_id);
+                    // console.log("instance", instance.회사가올린다른채용공고);
+                    console.log("instance.공고_id",instance.공고_id)
+                    console.log("instances!!!!!!!",instances);
+                    // instance.회사가올린다른채용공고.push(com_group.공고_id);
+                    temp_set.add(instance.공고_id);
+                    // if (instance.공고_id.in)
+            })
+        });
+
+        
+
+        return temp_set;
+
+        // ========================================================================
+        // company_info.bulkCreate( [] ,{ 
+        //     updateOnDuplicate: ["회사가올린다른채용공고"]
+        // });
+        
+        // company_info.update({ 
+        //     회사가올린다른채용공고 : sequelize.fn('array_append', sequelize.col('회사가올린다른채용공고'), com_group.공고_id)}, 
+        //     { where: { 회사명: com_group.회사명 }},
+        // );
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+// 동기화 작업 구현
+exports.synCompany = async ({temp_set, com_group}) => {
+    try {
+        //company_info.update( { where: {회사명: com_group.회사명} },  {회사가올린다른채용공고 : temp_set} );
+
+        const updateData = temp_set;
+
+        // Array.from(updateData).forEach ( () => {
+        company_info.updateAll( {회사가올린다른채용공고 : updateData}, { where: {회사명: com_group.회사명}})
+        // })
+        // await company_info.findAll({
+        //     where: {회사명: com_group.회사명}
+        // }).then((result) => {
+        //     // console.log("result!!!!!", result[0]);
+           
+        // })    
     }
     catch (err) {
         console.log(err);
@@ -76,7 +129,11 @@ exports.findAllCompany = async () => {
     try {
         console.log("전체 공고 찾는 로직");
         
-        const allCompanies = company_info.findAll();
+        const allCompanies = company_info.findAll({
+
+            attributes: ['채용공고_id', '회사명', ,'국가','지역','채용포지션', '채용보상금', '사용기술'],
+            order: [['채용공고_id', 'ASC']],
+        });
         return allCompanies;
     }
     catch (err) {
@@ -92,6 +149,9 @@ exports.findAllNoitce = async (search) => {
         const searchVar = search;
 
         let search_result = await company_info.findAll({
+
+            attributes: ['채용공고_id', '회사명', ,'국가','지역','채용포지션', '채용보상금', '사용기술'],
+            order: [['채용공고_id', 'ASC']],
             where: {
                 회사명: {
                     [Op.like]: `%${searchVar}`
