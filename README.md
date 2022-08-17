@@ -13,6 +13,16 @@ Sequelize의 작동원리
 기술 스택 : node.js express postgresql sequelize
 
 -----
+api 명세 
+- company
+   - /api/company/create    :arrow_right: 공고 생성
+   - /api/company/update    :arrow_right: 공고 수정
+   - /api/company/delete    :arrow_right: 공고 삭제
+   - /api/company/findAll   :arrow_right: 모든 공고 목록 조회
+   - /api/company/some/url? :arrow_right: 쿼리스트링 -> 특정단어로 조회
+- user
+   - /api/user/apply        :arrow_right: 지원서 넣기
+-----
 
 <img width="1363" alt="스크린샷 2022-08-16 오전 10 21 58" src="https://user-images.githubusercontent.com/55525574/184778853-ac75364a-ce68-49b2-9df7-11e63ac8f458.png">
 
