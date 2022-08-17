@@ -15,9 +15,9 @@ Sequelize의 작동원리
 -----
 api 명세 
 - company
-   - /api/company/create    :arrow_right: 공고 생성
-   - /api/company/update    :arrow_right: 공고 수정
-   - /api/company/delete    :arrow_right: 공고 삭제
+   - /api/company/noticeCreate    :arrow_right: 공고 생성
+   - /api/company/noticeUpdate    :arrow_right: 공고 수정
+   - /api/company/noticeDelete    :arrow_right: 공고 삭제
    - /api/company/findAll   :arrow_right: 모든 공고 목록 조회
    - /api/company/some/url? :arrow_right: 쿼리스트링 -> 특정단어로 조회
 - user
