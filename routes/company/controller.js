@@ -38,6 +38,7 @@ exports.createCompany = async (req, res) => {
 
         res.status(CREATED).json({
           message: '채용 공고 등록 성공',
+          list : temp_set,
         });
       } catch (error) {
         res.status(BAD_REQUEST).json({

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
 	const notices = sequelize.define("notices", {
-        공고_id: {
+        회사명: {
             type: Sequelize.STRING,
             primaryKey: true,
         },

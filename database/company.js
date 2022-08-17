@@ -15,7 +15,7 @@ exports.createCompany = async ({com_info}) => {
             채용보상금: com_info.채용보상금,
             채용내용: com_info.채용내용,
             사용기술: com_info.사용기술,
-            회사가올린다른채용공고: [],
+            // 회사가올린다른채용공고: [],
         },
         // {
         //     updateOnDuplicate: ["회사가올린다른채용공고"]
@@ -30,7 +30,7 @@ exports.createCompany = async ({com_info}) => {
 // 간단히 array_append를 정리하자면 update치면서 변경할 컬럼에 추가하고 싶은 받아온 데이터를 넣어주는 형식
 // where 절로 같은 회사끼리만 구분해주구요! 
 
-// 회사가 올린다른채용공고에 추가하기
+// 회사가 올린다른채용공고에 추가하기  => notice에 구현
 exports.groupingCompany = async ({com_group}) => {
     try {
 
@@ -38,24 +38,21 @@ exports.groupingCompany = async ({com_group}) => {
         // let temp_set = [];
         // ========================================================================
 
-        let temp_set = new Set();
-        await company_info.findAll({
-            where: {회사명: com_group.회사명},
-            }).then(function (instances) {
-                instances.forEach(function (instance){
-                    // 회사가올린다른채용공고.push(instance.공고_id);
-                    // console.log("instance", instance.회사가올린다른채용공고);
-                    console.log("instance.공고_id",instance.공고_id)
-                    console.log("instances!!!!!!!",instances);
-                    // instance.회사가올린다른채용공고.push(com_group.공고_id);
-                    temp_set.add(instance.공고_id);
-                    // if (instance.공고_id.in)
-            })
-        });
-
-        
-
-        return temp_set;
+        // let temp_set = new Set();
+        // await company_info.findAll({
+        //     where: {회사명: com_group.회사명},
+        //     }).then(function (instances) {
+        //         instances.forEach(function (instance){
+        //             // 회사가올린다른채용공고.push(instance.공고_id);
+        //             // console.log("instance", instance.회사가올린다른채용공고);
+        //             console.log("instance.공고_id",instance.공고_id)
+        //             console.log("instances!!!!!!!",instances);
+        //             // instance.회사가올린다른채용공고.push(com_group.공고_id);
+        //             temp_set.add(instance.공고_id);
+        //             // if (instance.공고_id.in)
+        //     })
+        // });
+        // return temp_set;
 
         // ========================================================================
         // company_info.bulkCreate( [] ,{ 
@@ -72,15 +69,15 @@ exports.groupingCompany = async ({com_group}) => {
     }
 }
 
-// 동기화 작업 구현
+// 동기화 작업 구현  => notice에 구현
 exports.synCompany = async ({temp_set, com_group}) => {
     try {
         //company_info.update( { where: {회사명: com_group.회사명} },  {회사가올린다른채용공고 : temp_set} );
 
-        const updateData = temp_set;
+        // const updateData = temp_set;
 
         // Array.from(updateData).forEach ( () => {
-        company_info.updateAll( {회사가올린다른채용공고 : updateData}, { where: {회사명: com_group.회사명}})
+        // company_info.updateAll( {회사가올린다른채용공고 : updateData}, { where: {회사명: com_group.회사명}})
         // })
         // await company_info.findAll({
         //     where: {회사명: com_group.회사명}
