@@ -22,19 +22,37 @@ api 명세
    - /api/company/some/url? :arrow_right: 쿼리스트링 -> 특정단어로 조회
 - user
    - /api/user/apply        :arrow_right: 지원서 넣기
+   
 -----
 
-<img width="1363" alt="스크린샷 2022-08-16 오전 10 21 58" src="https://user-images.githubusercontent.com/55525574/184778853-ac75364a-ce68-49b2-9df7-11e63ac8f458.png">
+/api/company/noticeCreate   :arrow_right: 공고 생성
 
-<img width="1304" alt="스크린샷 2022-08-16 오전 11 12 28" src="https://user-images.githubusercontent.com/55525574/184783767-fe14c50d-c683-4c1b-bce9-04b62d91f9d8.png">
 
-[POSTMAN] findALL 검색결과확인
-![스크린샷 2022-08-16 오전 11 14 26](https://user-images.githubusercontent.com/55525574/184783987-5e211dbd-f655-4e84-9a5e-f9af3a0decce.png)
+<img width="259" alt="스크린샷 2022-08-20 오후 4 53 57" src="https://user-images.githubusercontent.com/55525574/185735115-a838a5bc-9bd2-4ee0-a3b5-655368065d7f.png">
 
-[POSTMAN] sampleId1 update 이후 변경사항 확인 
+<img width="1006" alt="스크린샷 2022-08-20 오후 4 52 53" src="https://user-images.githubusercontent.com/55525574/185735077-a86ca2cb-1c67-457f-a8ea-852658a0fb83.png">
 
-![스크린샷 2022-08-16 오전 11 29 38](https://user-images.githubusercontent.com/55525574/184785564-c9766557-3a3e-4b95-9785-a15dc9ea21ed.png)
+-----
 
-[POSTMAN] GET 방식의 쿼리스트링 데이터로 검색 결과 확인
+/api/company/noticeUpdate :arrow_right: 공고 수정
 
-![스크린샷 2022-08-16 오후 3 38 21](https://user-images.githubusercontent.com/55525574/184813780-2fb5ee7b-87bc-4622-9417-f40521d72c2e.png)
+<img width="1257" alt="스크린샷 2022-08-20 오후 4 56 16" src="https://user-images.githubusercontent.com/55525574/185735200-f588bc47-5a03-4e59-bd29-f47bd09cdeec.png">
+<img width="996" alt="스크린샷 2022-08-20 오후 5 02 18" src="https://user-images.githubusercontent.com/55525574/185735396-4bb06a22-6f5a-4afa-be33-9085435231b4.png">
+<img width="1317" alt="스크린샷 2022-08-20 오후 5 02 45" src="https://user-images.githubusercontent.com/55525574/185735424-f8833cae-b479-4f01-9350-19e069977178.png">
+
+-----
+
+/api/company/noticeDelete :arrow_right: 공고 삭제
+
+<img width="1317" alt="스크린샷 2022-08-20 오후 5 02 45" src="https://user-images.githubusercontent.com/55525574/185735424-f8833cae-b479-4f01-9350-19e069977178.png">
+<img width="1002" alt="스크린샷 2022-08-20 오후 5 07 09" src="https://user-images.githubusercontent.com/55525574/185735585-67cd88dc-5671-4bd0-bc5e-b6eb21be7d1c.png">
+<img width="938" alt="스크린샷 2022-08-20 오후 5 07 40" src="https://user-images.githubusercontent.com/55525574/185735605-fb61813c-52bb-40dd-95e1-9fe3818fa8da.png">
+
+-----
+
+/api/company/findAll   :arrow_right: 모든 공고 목록 조회
+<img width="1471" alt="스크린샷 2022-08-20 오후 5 10 46" src="https://user-images.githubusercontent.com/55525574/185735726-0d3a9695-d04b-4f66-a7ad-a2537822a7e9.png">
+
+
+
+
