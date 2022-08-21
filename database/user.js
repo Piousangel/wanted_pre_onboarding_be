@@ -4,14 +4,14 @@ const db = require("../models");
 const Op = db.Sequelize.Op;   // like를 사용하기 위해
 
 const user_infos = db.user_info;
-const company_infos = db.company_info;
+const company_info = db.company_info;
 
 exports.applyCompany = async ({user_info}) => {
 
     try {
         
         // 공고가 존재하는 공고인지 확인하는 로직
-        let noticeCheck = await company_infos.findOne({
+        let noticeCheck = await company_info.findOne({
             where: {
                 공고_id: user_info.공고_id,
             }

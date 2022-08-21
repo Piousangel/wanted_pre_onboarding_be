@@ -6,7 +6,10 @@ const company_info = db.company_info;  //models의 index.js에 있는 db.company
 
 exports.createCompany = async ({com_info}) => {
     try {
-        const company = await company_info.create({
+
+        // console.log("com_info!@#!@#", com_info);
+
+        let company = await company_info.create({
             공고_id: com_info.공고_id,
             회사명: com_info.회사명,
             국가: com_info.국가,
@@ -15,12 +18,12 @@ exports.createCompany = async ({com_info}) => {
             채용보상금: com_info.채용보상금,
             채용내용: com_info.채용내용,
             사용기술: com_info.사용기술,
-            // 회사가올린다른채용공고: [],
+            회사가올린다른채용공고: [],
         },
-        // {
-        //     updateOnDuplicate: ["회사가올린다른채용공고"]
-        // }
         );
+
+        console.log("dbCompanylog!!!!!!", company);
+        return company;
     }
     catch (err) {
         console.log(err);
@@ -29,7 +32,6 @@ exports.createCompany = async ({com_info}) => {
 
 // 간단히 array_append를 정리하자면 update치면서 변경할 컬럼에 추가하고 싶은 받아온 데이터를 넣어주는 형식
 // where 절로 같은 회사끼리만 구분해주구요! 
-
 // 회사가 올린다른채용공고에 추가하기  => notice에 구현
 exports.groupingCompany = async ({com_group}) => {
     try {
@@ -98,9 +100,11 @@ exports.updateCompany = async ({com_info}) => {
         const notice_id = com_info.공고_id;
 
         //기존의 것에 새로 추가가 아니라 com_info로 update
-        company_info.update(com_info, {
+        const updateForm = company_info.update(com_info, {
             where: {공고_id: notice_id},
         })
+
+        
     }
     catch (err) {
         console.log(err);
@@ -142,13 +146,13 @@ exports.findAllCompany = async () => {
 exports.findAllNoitce = async (search) => {
     try {
         console.log("해당 이름으로 공고 찾는 로직");
-        console.log("name : ", search);
+        // console.log("name : ", search);
         const searchVar = search;
 
         let search_result = await company_info.findAll({
 
-            attributes: ['채용공고_id', '회사명', ,'국가','지역','채용포지션', '채용보상금', '사용기술'],
-            order: [['채용공고_id', 'ASC']],
+            // attributes: ['채용공고_id', '회사명', ,'국가','지역','채용포지션', '채용보상금', '사용기술'],
+            // order: [['채용공고_id', 'ASC']],
             where: {
                 회사명: {
                     [Op.like]: `%${searchVar}`

@@ -24,7 +24,6 @@ exports.syncSameCompany = async ({com_group}) => {
         //     where: {회사명: 회사이름}
         // })
 
-
         // let updateNotice = notices.update(notice_list, {
         //     attributes : ['공고목록'],
         //     where: {회사명: 회사이름},

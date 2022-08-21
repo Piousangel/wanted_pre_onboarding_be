@@ -28,17 +28,19 @@ exports.createCompany = async (req, res) => {
             회사명 : req.body.company_name,
         }
 
-        await companyServices.createCompany({com_info});
+        const createForm = await companyServices.createCompany({com_info});
         console.log("createCompany success");
 
+        console.log("createForm!!!!!!", createForm);
+
         //회사가 올린 다른 채용공고 추가
-        let temp_set = await noticeServices.syncSameCompany({com_group});
+        // let temp_set = await noticeServices.syncSameCompany({com_group});
 
         // await companyServices.addSameCompany({temp_set, com_group});
 
         res.status(CREATED).json({
           message: '채용 공고 등록 성공',
-          list : temp_set,
+          form : createForm,
         });
       } catch (error) {
         res.status(BAD_REQUEST).json({
@@ -68,6 +70,7 @@ exports.updateCompany = async (req, res) => {
 
         res.status(CREATED).json({
           message: '채용 공고 수정 성공',
+          // form : updateForm,
         });
       } catch (error) {
         res.status(BAD_REQUEST).json({

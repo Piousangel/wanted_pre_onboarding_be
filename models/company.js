@@ -25,9 +25,9 @@ module.exports = (sequelize, Sequelize) => {
         사용기술: {
             type: Sequelize.STRING
         },
-        // 회사가올린다른채용공고: {
-        //     type: Sequelize.ARRAY(Sequelize.TEXT)
-        // }
+        회사가올린다른채용공고: {
+            type: Sequelize.ARRAY(Sequelize.TEXT)
+        }
 	});
 
 	return company_info
