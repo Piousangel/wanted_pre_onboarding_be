@@ -1,3 +1,5 @@
+// connection.js는 지금은 사용하지 않습니다.
+
 const express = require("express");
 const app = express();
 let pg = require('pg');
